@@ -44,11 +44,11 @@ egen xt=group(iso3_o year)
 egen mt=group(iso3_d year)
 
 // OLS for policy if you need the fixed effects
-xtreg lt `grav2' xt mt
+xtreg lt `grav2' i.xt i.mt
 estimates store xt3
 
 // Better if we absorb the fixed effects (but you wont get the fe itself)
-reghdfe lt `grav2', absorb(xt mt) cluster(id)
+reghdfe lt `grav2', absorb(xt mt)
 estimates store xt4
 ppmlhdfe t `grav2', absorb(xt mt)
 estimates store pp3
